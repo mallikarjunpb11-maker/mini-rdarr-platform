@@ -1,0 +1,44 @@
+[
+  {
+    "pipeline_stage": "INGESTION_AND_ENRICHMENT",
+    "timestamp_utc": "2026-11-07T07:04:51.065256Z",
+    "source_file": "data\\raw\\lending_club_sample.csv",
+    "source_sha256": "e67ad672d19878021e34543cc0f994719c89f46ed351b3cb0d9ed2bc2fadd12d",
+    "records_read": 1200,
+    "records_written": 1200,
+    "total_exposure_usd": 17627500.0,
+    "total_risk_weighted_exposure_usd": 9589375.0,
+    "output_file": "data\\processed\\loans_enriched.csv",
+    "status": "SUCCESS"
+  },
+  {
+    "pipeline_stage": "DATA_QUALITY_VERIFICATION",
+    "timestamp_utc": "2026-11-07T07:07:38.935360+00:00",
+    "input_file": "data\\processed\\loans_enriched.csv",
+    "dq_report": "data\\processed\\dq_report.json",
+    "dq_health_score_pct": 100.0,
+    "status": "COMPLIANT"
+  },
+  {
+    "pipeline_stage": "RISK_DATA_AGGREGATION",
+    "timestamp_utc": "2026-11-07T07:10:31.522774+00:00",
+    "engine": "DuckDB (In-Memory SQL)",
+    "input_dataset": "data\\processed\\loans_enriched.csv",
+    "output_parquet": "data\\processed\\risk_aggregated.parquet",
+    "total_aggregated_rows": 36,
+    "entities_monitored": 3,
+    "breaches_detected": 3,
+    "status": "SUCCESS"
+  },
+  {
+    "pipeline_stage": "RISK_DATA_AGGREGATION",
+    "timestamp_utc": "2026-11-07T07:18:26.891195+00:00",
+    "engine": "DuckDB (In-Memory SQL)",
+    "input_dataset": "data\\processed\\loans_enriched.csv",
+    "output_parquet": "data\\processed\\risk_aggregated.parquet",
+    "total_aggregated_rows": 36,
+    "entities_monitored": 3,
+    "breaches_detected": 1,
+    "status": "SUCCESS"
+  }
+]

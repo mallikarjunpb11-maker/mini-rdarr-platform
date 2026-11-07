@@ -1,0 +1,93 @@
+# ==============================================================================
+# Mini-RDARR Platform Configuration
+# Alignment: Basel Committee on Banking Supervision (BCBS 239)
+# Principles:
+#   - Principle 1: Governance & Risk Appetite Framework
+#   - Principle 2: Data Architecture & Lineage
+#   - Principle 3: Accuracy & Integrity (Data Quality Controls)
+#   - Principle 4: Completeness (Group-wide Risk Aggregation)
+#   - Principle 8: Comprehensiveness (Limit Breach Monitoring)
+# ==============================================================================
+
+project:
+  name: "Mini-RDARR Risk Aggregation Platform"
+  version: "1.0.0"
+  environment: "development"
+  base_currency: "USD"
+
+# 1. Directory and File Paths (Centralized storage management)
+paths:
+  raw_data: "data/raw/lending_club_sample.csv"
+  processed_dir: "data/processed"
+  reference_dir: "data/reference"
+  lineage_log: "data/processed/lineage_log.json"
+  quality_report: "data/processed/dq_report.json"
+  aggregated_output: "data/processed/risk_aggregated.parquet"
+
+# 2. Enterprise Legal Entities & Risk Limits (BCBS 239 Principle 4 & 8)
+# Limits are calibrated to loan volume so we can demonstrate: Green, Amber, and Red states
+legal_entities:
+  - code: "LE_01"
+    name: "Global Retail Bank NA"
+    jurisdiction: "United States"
+    currency: "USD"
+    exposure_limit: 7000000      # 7.0M -> Exposure is $7.91M (Active Breach ~113% - RED)
+  - code: "LE_02"
+    name: "European Corporate Lending AG"
+    jurisdiction: "Germany"
+    currency: "EUR"
+    exposure_limit: 6500000      # 6.5M -> Exposure is $6.08M (Warning ~93% - AMBER)
+  - code: "LE_03"
+    name: "Asia-Pacific Commercial Ltd"
+    jurisdiction: "Singapore"
+    currency: "SGD"
+    exposure_limit: 5000000      # 5.0M -> Exposure is $3.63M (Safe ~72% - GREEN)
+
+# 3. Organizational Segments (BCBS 239 Principle 4: Slicing by Business Line)
+business_units:
+  - "Consumer Lending"
+  - "Small Business Banking"
+  - "Specialized Credit"
+
+risk_categories:
+  - "Credit Risk"
+  - "Counterparty Risk"
+
+# 4. Source Data Systems (BCBS 239 Principle 2: Data Lineage & Provenance)
+source_systems:
+  - id: "SRC_CORE_LOAN"
+    name: "Core Loan Origination System"
+    protocol: "BATCH_CSV"
+  - id: "SRC_REF_STATIC"
+    name: "Enterprise Reference Data Store"
+    protocol: "INTERNAL_SQL"
+
+# 5. Automated Data Quality SLAs (BCBS 239 Principle 3: Accuracy and Integrity)
+data_quality:
+  critical_data_elements:
+    - "loan_id"
+    - "loan_amnt"
+    - "int_rate"
+    - "grade"
+    - "term"
+    - "legal_entity"
+  thresholds:
+    max_missing_pct: 5.0          # Max acceptable missing values per critical field
+    min_loan_amount: 500.0        # Unsecured personal loan minimum
+    max_loan_amount: 40000.0      # Lending Club maximum ceiling
+    allowed_grades:
+      - "A"
+      - "B"
+      - "C"
+      - "D"
+      - "E"
+      - "F"
+      - "G"
+    allowed_terms:
+      - "36 months"
+      - "60 months"
+
+# 6. Risk Alert Thresholds (BCBS 239 Principle 8: Timely and Comprehensive Reporting)
+reporting:
+  breach_warning_pct: 85.0       # Amber status: review loan originations
+  breach_critical_pct: 100.0     # Red status: halt new exposure / escalate to CRO

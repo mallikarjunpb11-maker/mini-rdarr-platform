@@ -1,0 +1,8 @@
+grade,risk_tier,credit_quality,pd_range_pct,capital_weight_pct
+A,Tier 1,Prime,0.00-2.50,20
+B,Tier 1,Near Prime,2.51-5.00,35
+C,Tier 2,Subprime High,5.01-8.50,50
+D,Tier 2,Subprime Medium,8.51-13.00,75
+E,Tier 3,Speculative,13.01-18.00,100
+F,Tier 3,High Risk,18.01-25.00,150
+G,Tier 4,Extreme Risk,>25.00,200

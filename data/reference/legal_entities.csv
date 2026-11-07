@@ -1,0 +1,4 @@
+entity_id,legal_name,jurisdiction,base_currency,regulatory_regime,exposure_limit_usd
+LE_01,Global Retail Bank NA,United States,USD,US_FED,7000000
+LE_02,European Corporate Lending AG,Germany,EUR,ECB,6500000
+LE_03,Asia-Pacific Commercial Ltd,Singapore,SGD,MAS,5000000

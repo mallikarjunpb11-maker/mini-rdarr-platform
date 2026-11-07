@@ -1,0 +1,76 @@
+{
+  "report_id": "DQR_20261107_070738",
+  "timestamp_utc": "2026-11-07T07:07:38.933197+00:00",
+  "source_dataset": "data\\processed\\loans_enriched.csv",
+  "total_records_evaluated": 1200,
+  "total_rules_evaluated": 9,
+  "rules_passed": 9,
+  "rules_failed": 0,
+  "dq_health_score_pct": 100.0,
+  "overall_status": "COMPLIANT",
+  "rule_details": [
+    {
+      "dimension": "Completeness",
+      "check_name": "Missingness: loan_id",
+      "metric_value": "0.0% (0 rows)",
+      "threshold": "<= 5.0%",
+      "status": "PASSED"
+    },
+    {
+      "dimension": "Completeness",
+      "check_name": "Missingness: loan_amnt",
+      "metric_value": "0.0% (0 rows)",
+      "threshold": "<= 5.0%",
+      "status": "PASSED"
+    },
+    {
+      "dimension": "Completeness",
+      "check_name": "Missingness: int_rate",
+      "metric_value": "0.83% (10 rows)",
+      "threshold": "<= 5.0%",
+      "status": "PASSED"
+    },
+    {
+      "dimension": "Completeness",
+      "check_name": "Missingness: grade",
+      "metric_value": "0.0% (0 rows)",
+      "threshold": "<= 5.0%",
+      "status": "PASSED"
+    },
+    {
+      "dimension": "Completeness",
+      "check_name": "Missingness: term",
+      "metric_value": "0.0% (0 rows)",
+      "threshold": "<= 5.0%",
+      "status": "PASSED"
+    },
+    {
+      "dimension": "Completeness",
+      "check_name": "Missingness: legal_entity",
+      "metric_value": "0.0% (0 rows)",
+      "threshold": "<= 5.0%",
+      "status": "PASSED"
+    },
+    {
+      "dimension": "Uniqueness",
+      "check_name": "Unique Loan Identifier",
+      "metric_value": "0 duplicates",
+      "threshold": "0 duplicates",
+      "status": "PASSED"
+    },
+    {
+      "dimension": "Validity",
+      "check_name": "Permitted Credit Grades (A-G)",
+      "metric_value": "0 invalid grades",
+      "threshold": "0 invalid",
+      "status": "PASSED"
+    },
+    {
+      "dimension": "Integrity",
+      "check_name": "Loan Amount Boundaries ($500 - $40,000)",
+      "metric_value": "0 outliers",
+      "threshold": "0 out of bounds",
+      "status": "PASSED"
+    }
+  ]
+}
